@@ -67,8 +67,8 @@ public class BidListController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         BidList bidList = bidListService.getBidListById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid BidList Id : " + id ));
-        bidListService.deleteBidListById(id);
         model.addAttribute("bidList", bidList);
+        bidListService.deleteBidListById(id);
         return "redirect:/bidList/list";
     }
 }

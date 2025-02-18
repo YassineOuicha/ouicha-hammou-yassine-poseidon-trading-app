@@ -67,8 +67,8 @@ public class RatingController {
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         Rating rating = ratingService.getRatingById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid Rating Id : " + id));
-        ratingService.deleteRatingById(id);
         model.addAttribute("rating", rating);
+        ratingService.deleteRatingById(id);
         return "redirect:/rating/list";
     }
 }

@@ -3,7 +3,9 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "rulename")
 public class RuleName {

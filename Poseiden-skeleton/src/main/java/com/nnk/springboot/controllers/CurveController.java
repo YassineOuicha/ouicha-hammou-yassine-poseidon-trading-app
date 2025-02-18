@@ -67,8 +67,8 @@ public class CurveController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         CurvePoint curvePoint = curvePointService.getCurvePointById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid CurvePoint Id : " + id));
-        curvePointService.deleteCurvePointById(id);
         model.addAttribute("curvePoint", curvePoint);
+        curvePointService.deleteCurvePointById(id);
         return "redirect:/curvePoint/list";
     }
 }
