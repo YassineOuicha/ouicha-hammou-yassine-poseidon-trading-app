@@ -47,7 +47,7 @@ public class CurveController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         CurvePoint curvePoint = curvePointService.getCurvePointById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid CurvePoint Id : " + id));
-        model.addAttribute(curvePoint);
+        model.addAttribute("curvePoint", curvePoint);
         return "curvePoint/update";
     }
 
@@ -65,7 +65,10 @@ public class CurveController {
 
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
+        CurvePoint curvePoint = curvePointService.getCurvePointById(id)
+                .orElseThrow(()-> new RuntimeException("Invalid CurvePoint Id : " + id));
         curvePointService.deleteCurvePointById(id);
+        model.addAttribute("curvePoint", curvePoint);
         return "redirect:/curvePoint/list";
     }
 }
