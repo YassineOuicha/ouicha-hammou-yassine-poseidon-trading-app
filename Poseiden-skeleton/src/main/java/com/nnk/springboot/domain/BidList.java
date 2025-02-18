@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import java.sql.Timestamp;
 
@@ -12,7 +13,6 @@ public class BidList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "BidListId is mandatory")
     private int bidListId;
 
     @NotBlank(message = "Account is mandatory")
@@ -21,10 +21,13 @@ public class BidList {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
+    @NotNull(message = "Bid Quantity is mandatory")
     private double bidQuantity;
+
     private double askQuantity;
     private double bid;
     private double ask;
+
     private String benchmark;
     private Timestamp bidListDate;
     private String commentary;

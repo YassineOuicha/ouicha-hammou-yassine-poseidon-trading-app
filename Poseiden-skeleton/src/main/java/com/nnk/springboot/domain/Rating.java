@@ -2,7 +2,6 @@ package com.nnk.springboot.domain;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -12,7 +11,6 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "Id is mandatory")
     private int id;
 
     private String moodysRating;

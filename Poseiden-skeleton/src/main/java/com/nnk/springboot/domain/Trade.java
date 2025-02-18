@@ -16,7 +16,6 @@ public class Trade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "TradeId is mandatory")
     private int tradeId;
 
     @NotBlank(message = "Account is mandatory")

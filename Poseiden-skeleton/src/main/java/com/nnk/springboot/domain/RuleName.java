@@ -12,7 +12,6 @@ public class RuleName {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "Id is mandatory")
     private int id;
 
     private String name;
