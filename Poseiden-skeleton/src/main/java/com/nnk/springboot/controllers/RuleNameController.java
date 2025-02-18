@@ -23,8 +23,7 @@ public class RuleNameController {
 
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
-        List<RuleName> ruleNameList = ruleNameService.getAllRuleNames();
-        model.addAttribute("ruleNameList", ruleNameList);
+        model.addAttribute("ruleNames", ruleNameService.getAllRuleNames());;
         return "ruleName/list";
     }
 
@@ -38,8 +37,8 @@ public class RuleNameController {
         if (result.hasErrors()){
             return "ruleName/add";
         }
-        ruleName = ruleNameService.saveRuleName(ruleName);
-        model.addAttribute("ruleName", ruleName);
+        ruleNameService.saveRuleName(ruleName);
+        model.addAttribute("ruleNames", ruleNameService.getAllRuleNames());
         return "redirect:/ruleName/list";
     }
 
@@ -59,7 +58,7 @@ public class RuleNameController {
         }
         ruleName.setId(id);
         ruleNameService.saveRuleName(ruleName);
-        model.addAttribute("ruleName", ruleName);
+        model.addAttribute("ruleNames", ruleNameService.getAllRuleNames());
         return "redirect:/ruleName/list";
     }
 
@@ -67,8 +66,8 @@ public class RuleNameController {
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         RuleName ruleName = ruleNameService.getRuleNameById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid RuleName Id : " + id));
-        model.addAttribute("ruleName", ruleName);
         ruleNameService.deleteRuleNameById(id);
+        model.addAttribute("ruleNames", ruleNameService.getAllRuleNames());
         return "redirect:/ruleName/list";
     }
 }

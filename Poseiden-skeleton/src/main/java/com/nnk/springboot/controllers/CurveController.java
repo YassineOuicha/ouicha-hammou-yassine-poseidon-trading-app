@@ -23,8 +23,7 @@ public class CurveController {
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
-        List<CurvePoint> curvePointList = curvePointService.getAllCurvePoint();
-        model.addAttribute("curvePointList", curvePointList);
+        model.addAttribute("curvePoints", curvePointService.getAllCurvePoint());
         return "curvePoint/list";
     }
 
@@ -59,7 +58,7 @@ public class CurveController {
         }
         curvePoint.setId(id);
         curvePointService.saveCurvePoint(curvePoint);
-        model.addAttribute("curvePoint", curvePoint);
+        model.addAttribute("curvePoints", curvePointService.getAllCurvePoint());
         return "redirect:/curvePoint/list";
     }
 
@@ -67,8 +66,8 @@ public class CurveController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         CurvePoint curvePoint = curvePointService.getCurvePointById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid CurvePoint Id : " + id));
-        model.addAttribute("curvePoint", curvePoint);
         curvePointService.deleteCurvePointById(id);
+        model.addAttribute("curvePoints", curvePointService.getAllCurvePoint());
         return "redirect:/curvePoint/list";
     }
 }

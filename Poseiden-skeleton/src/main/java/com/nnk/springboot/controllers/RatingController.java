@@ -23,8 +23,7 @@ public class RatingController {
 
     @RequestMapping("/rating/list")
     public String home(Model model) {
-        List<Rating> ratingList = ratingService.getAllRating();
-        model.addAttribute("ratingList" , ratingList);
+        model.addAttribute("ratings", ratingService.getAllRating());
         return "rating/list";
     }
 
@@ -38,8 +37,8 @@ public class RatingController {
         if (result.hasErrors()){
             return "rating/add";
         }
-        rating = ratingService.saveRating(rating);
-        model.addAttribute("rating", rating);
+        ratingService.saveRating(rating);
+        model.addAttribute("ratings", ratingService.getAllRating());
         return "redirect:/rating/list";
     }
 
@@ -59,7 +58,7 @@ public class RatingController {
         }
         rating.setId(id);
         ratingService.saveRating(rating);
-        model.addAttribute("rating", rating);
+        model.addAttribute("ratings", ratingService.getAllRating());
         return "redirect:/rating/list";
     }
 
@@ -67,8 +66,8 @@ public class RatingController {
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         Rating rating = ratingService.getRatingById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid Rating Id : " + id));
-        model.addAttribute("rating", rating);
         ratingService.deleteRatingById(id);
+        model.addAttribute("ratings", ratingService.getAllRating());
         return "redirect:/rating/list";
     }
 }

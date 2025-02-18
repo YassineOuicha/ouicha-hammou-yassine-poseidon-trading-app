@@ -23,8 +23,7 @@ public class BidListController {
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
-        List<BidList> bidLists = bidListService.getAllBidList();
-        model.addAttribute("bidLists", bidLists);
+        model.addAttribute("bidLists", bidListService.getAllBidList());
         return "bidList/list";
     }
 
@@ -59,7 +58,7 @@ public class BidListController {
         }
         bidList.setBidListId(id);
         bidListService.saveBidList(bidList);
-        model.addAttribute("bidList", bidList);
+        model.addAttribute("bidLists", bidListService.getAllBidList());
         return "redirect:/bidList/list";
     }
 
@@ -67,8 +66,8 @@ public class BidListController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         BidList bidList = bidListService.getBidListById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid BidList Id : " + id ));
-        model.addAttribute("bidList", bidList);
         bidListService.deleteBidListById(id);
+        model.addAttribute("bidLists", bidListService.getAllBidList());
         return "redirect:/bidList/list";
     }
 }
