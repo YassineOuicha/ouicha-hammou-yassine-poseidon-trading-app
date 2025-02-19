@@ -16,18 +16,19 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/trade")
 public class TradeController {
 
     @Autowired
     private TradeService tradeService;
 
-    @RequestMapping("/trade/list")
+    @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("trades", tradeService.getAllTrades());
         return "trade/list";
     }
 
-    @GetMapping("/trade/add")
+    @GetMapping("/add")
     public String addTradeForm(Trade trade) {
         return "trade/add";
     }
@@ -42,15 +43,14 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
-    @GetMapping("/trade/update/{id}")
+    @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        Trade trade = tradeService.getTradeById(id)
-                .orElseThrow(()-> new RuntimeException("Invalid Trade Id : " + id));
+        Trade trade = tradeService.getTradeById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Trade Id: " + id));
         model.addAttribute("trade", trade);
         return "trade/update";
     }
 
-    @PostMapping("/trade/update/{id}")
+    @PostMapping("/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
         if (result.hasErrors()){
@@ -62,10 +62,9 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
-    @GetMapping("/trade/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        Trade trade = tradeService.getTradeById(id)
-                .orElseThrow(()-> new RuntimeException("Invalid Trade Id : " + id));
+        Trade trade = tradeService.getTradeById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Trade Id: " + id));
         tradeService.deleteTradeById(id);
         model.addAttribute("trades", tradeService.getAllTrades());
         return "redirect:/trade/list";
