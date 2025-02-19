@@ -23,7 +23,7 @@ public class TradeController {
 
     @RequestMapping("/trade/list")
     public String home(Model model) {
-        model.addAttribute("tradeList", tradeService.getAllTrades());
+        model.addAttribute("trades", tradeService.getAllTrades());
         return "trade/list";
     }
 
@@ -38,7 +38,7 @@ public class TradeController {
             return "trade/add";
         }
         tradeService.saveTrade(trade);
-        model.addAttribute("tradeList", tradeService.getAllTrades());
+        model.addAttribute("trades", tradeService.getAllTrades());
         return "redirect:/trade/list";
     }
 
@@ -58,7 +58,7 @@ public class TradeController {
         }
         trade.setTradeId(id);
         tradeService.saveTrade(trade);
-        model.addAttribute("tradeList", tradeService.getAllTrades());
+        model.addAttribute("trades", tradeService.getAllTrades());
         return "redirect:/trade/list";
     }
 
@@ -67,7 +67,7 @@ public class TradeController {
         Trade trade = tradeService.getTradeById(id)
                 .orElseThrow(()-> new RuntimeException("Invalid Trade Id : " + id));
         tradeService.deleteTradeById(id);
-        model.addAttribute("tradeList", tradeService.getAllTrades());
+        model.addAttribute("trades", tradeService.getAllTrades());
         return "redirect:/trade/list";
     }
 }
