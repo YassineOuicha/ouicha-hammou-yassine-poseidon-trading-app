@@ -1,153 +1,176 @@
-/* ===== Global Styles ===== */
+:root {
+  --bg-color: #f8f9fa;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --line-height: 1.6;
+  --container-bg: #ffffff;
+  --container-padding: 2rem;
+  --container-margin-top: 2rem;
+  --container-radius: 8px;
+  --container-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  --heading-color: #2c3e50;
+  --heading-border: #3498db;
+  --nav-bg: #34495e;
+  --nav-link-color: #ecf0f1;
+  --nav-link-hover-bg: #2c3e50;
+  --control-label-color: #34495e;
+  --control-label-weight: 600;
+  --input-border: #bdc3c7;
+  --input-focus-border: #3498db;
+  --error-color: #e74c3c;
+  --table-header-bg: #34495e;
+  --table-header-color: #ffffff;
+  --table-border: #dee2e6;
+  --btn-primary-bg: #3498db;
+  --btn-primary-hover-bg: #2980b9;
+  --btn-danger-bg: #e74c3c;
+  --btn-danger-hover-bg: #c0392b;
+  --print-font-size: 12pt;
+}
+
 body {
-    background-color: #f8f9fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+  background-color: var(--bg-color);
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    background: white;
-    padding: 2rem;
-    margin-top: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  background: var(--container-bg);
+  padding: var(--container-padding);
+  margin-top: var(--container-margin-top);
+  border-radius: var(--container-radius);
+  box-shadow: var(--container-shadow);
 }
 
 h2, h3 {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
+  color: var(--heading-color);
+  border-bottom: 2px solid var(--heading-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-/* ===== Navigation ===== */
 .row:first-child {
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: #34495e;
-    border-radius: 5px;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--nav-bg);
+  border-radius: 5px;
 }
 
 .row:first-child a {
-    color: #ecf0f1 !important;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s;
+  color: var(--nav-link-color) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
 }
 
 .row:first-child a:hover {
-    background: #2c3e50;
-    text-decoration: none;
-    border-radius: 4px;
+  background: var(--nav-link-hover-bg);
+  text-decoration: none;
+  border-radius: 4px;
 }
 
-/* ===== Form Styles ===== */
 .form-horizontal .control-label {
-    font-weight: 600;
-    color: #34495e;
+  font-weight: var(--control-label-weight);
+  color: var(--control-label-color);
 }
 
 .form-control {
-    border-radius: 4px;
-    padding: 0.75rem;
-    border: 2px solid #bdc3c7;
-    transition: border-color 0.3s;
+  border-radius: 4px;
+  padding: 0.75rem;
+  border: 2px solid var(--input-border);
+  transition: border-color 0.3s;
 }
 
 .form-control:focus {
-    border-color: #3498db;
-    box-shadow: none;
+  border-color: var(--input-focus-border);
+  box-shadow: none;
 }
 
 .text-danger {
-    font-size: 0.9em;
-    margin-top: 0.5rem;
-    display: block;
+  font-size: 0.9em;
+  margin-top: 0.5rem;
+  display: block;
 }
 
-/* ===== Table Styles ===== */
 .table {
-    margin-top: 1.5rem;
-    border-collapse: separate;
-    border-spacing: 0;
+  margin-top: 1.5rem;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .table thead th {
-    background: #34495e;
-    color: white;
-    border: none !important;
+  background: var(--table-header-bg);
+  color: var(--table-header-color);
+  border: none !important;
 }
 
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid var(--table-border);
 }
 
 .table tbody tr:hover {
-    background-color: rgba(52, 152, 219, 0.05);
+  background-color: rgba(52, 152, 219, 0.05);
 }
 
-/* ===== Button Styles ===== */
 .btn-sm {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-size: 0.9em;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9em;
 }
 
 .btn-primary {
-    background: #3498db;
-    border: none;
+  background: var(--btn-primary-bg);
+  border: none;
 }
 
 .btn-primary:hover {
-    background: #2980b9;
+  background: var(--btn-primary-hover-bg);
 }
 
 .btn-danger {
-    background: #e74c3c;
-    border: none;
+  background: var(--btn-danger-bg);
+  border: none;
 }
 
 .btn-danger:hover {
-    background: #c0392b;
+  background: var(--btn-danger-hover-bg);
 }
 
-/* ===== Print/PDF Optimization ===== */
 @media print {
-    .container {
-        box-shadow: none;
-        padding: 0;
-    }
-
-    .row:first-child, .btn, [aria-label="Action"] {
-        display: none !important;
-    }
-
-    table {
-        width: 100% !important;
-        font-size: 12pt;
-    }
-
-    h2, h3 {
-        color: black !important;
-        border-bottom: 2px solid black;
-    }
+  .container {
+    box-shadow: none;
+    padding: 0;
+  }
+  .row:first-child,
+  .btn,
+  [aria-label="Action"] {
+    display: none !important;
+  }
+  table {
+    width: 100% !important;
+    font-size: var(--print-font-size);
+  }
+  h2, h3 {
+    color: black !important;
+    border-bottom: 2px solid black;
+  }
 }
 
-/* ===== Error Page Styles ===== */
 .error {
-    color: #e74c3c;
-    padding: 1rem;
-    background: #fbe3e4;
-    border-radius: 4px;
-    margin-top: 1rem;
+  color: var(--error-color);
+  padding: 1rem;
+  background: #fbe3e4;
+  border-radius: 4px;
+  margin-top: 1rem;
 }
 
-/* ===== User Role Indicators ===== */
-[th\\:text*="ADMIN"] {
-    color: #27ae60;
-    font-weight: bold;
+[th\:text*="ADMIN"] {
+  color: var(--success-color, #27ae60);
+  font-weight: bold;
 }
 
-[th\\:text*="USER"] {
-    color: #f39c12;
+[th\:text*="USER"] {
+  color: var(--warning-color, #f39c12);
 }

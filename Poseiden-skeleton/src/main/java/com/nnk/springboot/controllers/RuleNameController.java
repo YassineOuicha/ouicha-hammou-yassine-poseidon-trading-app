@@ -16,23 +16,24 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/ruleName")
 public class RuleNameController {
 
     @Autowired
     private RuleNameService ruleNameService;
 
-    @RequestMapping("/ruleName/list")
+    @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("ruleNames", ruleNameService.getAllRuleNames());;
         return "ruleName/list";
     }
 
-    @GetMapping("/ruleName/add")
+    @GetMapping("/add")
     public String addRuleNameForm(RuleName bid) {
         return "ruleName/add";
     }
 
-    @PostMapping("/ruleName/validate")
+    @PostMapping("/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         if (result.hasErrors()){
             return "ruleName/add";
@@ -42,15 +43,14 @@ public class RuleNameController {
         return "redirect:/ruleName/list";
     }
 
-    @GetMapping("/ruleName/update/{id}")
+    @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        RuleName ruleName = ruleNameService.getRuleNameById(id)
-                .orElseThrow(()-> new RuntimeException("Invalid RuleName Id : " + id));
+        RuleName ruleName = ruleNameService.getRuleNameById(id).orElseThrow(()-> new IllegalArgumentException("Invalid RuleName Id:" + id));
         model.addAttribute("ruleName", ruleName);
         return "ruleName/update";
     }
 
-    @PostMapping("/ruleName/update/{id}")
+    @PostMapping("/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
         if(result.hasErrors()){
@@ -62,10 +62,9 @@ public class RuleNameController {
         return "redirect:/ruleName/list";
     }
 
-    @GetMapping("/ruleName/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        RuleName ruleName = ruleNameService.getRuleNameById(id)
-                .orElseThrow(()-> new RuntimeException("Invalid RuleName Id : " + id));
+        RuleName ruleName = ruleNameService.getRuleNameById(id).orElseThrow(()-> new IllegalArgumentException("Invalid RuleName Id:" + id));
         ruleNameService.deleteRuleNameById(id);
         model.addAttribute("ruleNames", ruleNameService.getAllRuleNames());
         return "redirect:/ruleName/list";
