@@ -3,6 +3,7 @@ package com.nnk.springboot.domain;
 import com.nnk.springboot.config.ValidPassword;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
@@ -29,5 +30,6 @@ public class User {
 
     @NotBlank(message = "Role is mandatory")
     @Column(name = "role")
+    @Pattern(regexp = "ROLE_ADMIN|ROLE_USER", message = "Role must be ROLE_ADMIN or ROLE_USER")
     private String role;
 }

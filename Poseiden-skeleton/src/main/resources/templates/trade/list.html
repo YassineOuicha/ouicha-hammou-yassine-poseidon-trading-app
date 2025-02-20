@@ -19,7 +19,7 @@
 		</div>
 		<div class="col-6 text-right">
 			Logged in user: <b th:inline="text">[[${#httpServletRequest.remoteUser}]]</b>
-			<form th:action="@{/app-logout}" method="POST" style="display:inline;">
+			<form th:action="@{/logout}" method="POST" style="display:inline;">
 				<input type="submit" value="Logout"/>
 			</form>
 		</div>

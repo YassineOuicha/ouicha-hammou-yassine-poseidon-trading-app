@@ -1,6 +1,8 @@
 package com.nnk.springboot.config;
 
+import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +19,13 @@ import org.springframework.security.web.header.writers.XXssProtectionHeaderWrite
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private final UserRepository userRepository;
+
+    public SecurityConfig(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -24,7 +33,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
+        return new CustomUserDetailsService(userRepository);
     }
 
     @Bean
@@ -75,9 +84,12 @@ public class SecurityConfig {
     public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
         return (request, response, authentication) -> {
             String role = authentication.getAuthorities().iterator().next().getAuthority();
+            System.out.println("Authority received in handler: " + role);
             if (role.equals("ROLE_ADMIN")) {
+                System.out.println("Redirecting to admin home");
                 response.sendRedirect("/admin/home");
             } else {
+                System.out.println("Redirecting to bid list");
                 response.sendRedirect("/bidList/list");
             }
         };
