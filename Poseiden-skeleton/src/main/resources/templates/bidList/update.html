@@ -13,7 +13,6 @@
 	</div>
 	<div class="row">
 		<form th:action="@{/bidList/update/{id}(id=${bidList.bidListId})}" th:object="${bidList}" method="post" class="form-horizontal">
-
 			<input type="hidden" th:field="*{bidListId}">
 			<div class="form-group">
 				<label for="account" class="col-sm-2 control-label">Account</label>

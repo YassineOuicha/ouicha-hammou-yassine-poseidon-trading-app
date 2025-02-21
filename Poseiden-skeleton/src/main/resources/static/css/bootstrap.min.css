@@ -24,7 +24,12 @@
   --btn-primary-hover-bg: #2980b9;
   --btn-danger-bg: #e74c3c;
   --btn-danger-hover-bg: #c0392b;
+  --btn-secondary-bg: #95a5a6;
+  --btn-secondary-hover-bg: #7f8c8d;
   --print-font-size: 12pt;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --info-color: #3498db;
 }
 
 body {
@@ -91,6 +96,7 @@ h2, h3 {
   font-size: 0.9em;
   margin-top: 0.5rem;
   display: block;
+  color: var(--error-color);
 }
 
 .table {
@@ -138,6 +144,15 @@ h2, h3 {
   background: var(--btn-danger-hover-bg);
 }
 
+.btn-secondary {
+  background: var(--btn-secondary-bg);
+  border: none;
+}
+
+.btn-secondary:hover {
+  background: var(--btn-secondary-hover-bg);
+}
+
 @media print {
   .container {
     box-shadow: none;
@@ -167,10 +182,55 @@ h2, h3 {
 }
 
 [th\:text*="ADMIN"] {
-  color: var(--success-color, #27ae60);
+  color: var(--success-color);
   font-weight: bold;
 }
 
 [th\:text*="USER"] {
-  color: var(--warning-color, #f39c12);
+  color: var(--warning-color);
+  font-weight: bold;
+}
+
+
+.btn-outline-danger {
+  border-color: var(--btn-danger-bg);
+  color: var(--btn-danger-bg);
+}
+
+.btn-outline-danger:hover {
+  background: var(--btn-danger-bg);
+  color: white;
+}
+
+.btn-outline-secondary {
+  border-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-bg);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--btn-secondary-bg);
+  color: white;
+}
+
+
+.alert-success {
+  background-color: #d5f5e3;
+  border-color: #2ecc71;
+  color: #27ae60;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #e74c3c;
+  color: #c0392b;
+}
+
+
+.table a {
+  color: var(--btn-primary-bg);
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
 }
