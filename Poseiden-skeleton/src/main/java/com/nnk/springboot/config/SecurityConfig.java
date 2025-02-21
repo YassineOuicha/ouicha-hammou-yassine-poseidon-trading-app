@@ -2,28 +2,23 @@ package com.nnk.springboot.config;
 
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private final UserRepository userRepository;
+    private final CustomUserDetailsService userDetailsService;
 
     public SecurityConfig(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        this.userDetailsService = new CustomUserDetailsService(userRepository);
     }
 
     @Bean
@@ -32,13 +27,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService(userRepository);
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .userDetailsService(userDetailsService)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/", "/login", "/error").permitAll()
@@ -65,7 +56,7 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex
                         .accessDeniedPage("/403")
                 )
-                .csrf(csrf -> csrf // Ensure CSRF is enabled
+                .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
                 .headers(headers -> headers
@@ -76,7 +67,6 @@ public class SecurityConfig {
                                 .policyDirectives("frame-ancestors 'self'")
                         )
                 );
-
         return http.build();
     }
 
