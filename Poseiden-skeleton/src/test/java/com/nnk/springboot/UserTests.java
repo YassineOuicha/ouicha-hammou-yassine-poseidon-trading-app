@@ -22,7 +22,7 @@ public class UserTests {
     private UserRepository userRepository;
 
     @Test
-    public void bidListTest() {
+    public void UserTest() {
         User user = new User();
         user.setFullname("Super Admin");
         user.setRole("ROLE_ADMIN");
