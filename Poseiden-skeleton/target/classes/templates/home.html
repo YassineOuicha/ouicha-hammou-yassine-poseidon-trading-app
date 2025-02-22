@@ -14,6 +14,14 @@
             <p class="lead">Manage your bids, trades, and ratings efficiently.</p>
         </div>
     </div>
+
+    <div style="font-family: Arial, sans-serif;">
+        <span>Logged in user: <span th:text="${username}"></span></span>
+        <a href="/logout">
+            <button style="margin-left: 10px; padding: 2px 8px;">Logout</button>
+        </a>
+    </div>
+
     <div class="row mt-4">
         <div class="col-12 text-center">
             <a href="/bidList/list" class="btn btn-primary btn-lg">Bid List</a>
@@ -21,14 +29,6 @@
             <a href="/rating/list" class="btn btn-success btn-lg">Ratings</a>
             <a href="/trade/list" class="btn btn-danger btn-lg">Trades</a>
             <a href="/ruleName/list" class="btn btn-warning btn-lg">Rules</a>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-12 text-center">
-            <p>Logged in as: <b th:text="${#httpServletRequest.remoteUser}"></b></p>
-            <form th:action="@{/logout}" method="POST">
-                <button type="submit" class="btn btn-outline-dark">Logout</button>
-            </form>
         </div>
     </div>
 </div>

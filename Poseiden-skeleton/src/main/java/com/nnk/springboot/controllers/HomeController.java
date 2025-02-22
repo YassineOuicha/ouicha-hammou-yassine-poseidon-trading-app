@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = ( UserDetails) authentication.getPrincipal();
+		model.addAttribute("username", userDetails.getUsername() );
 		return "home";
 	}
 
