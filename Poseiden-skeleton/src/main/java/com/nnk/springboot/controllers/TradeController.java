@@ -4,6 +4,9 @@ import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.TradeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,11 +23,18 @@ import java.util.List;
 public class TradeController {
 
     @Autowired
-    private TradeService tradeService;
+    private final TradeService tradeService;
+
+    public TradeController(TradeService tradeService) {
+        this.tradeService = tradeService;
+    }
 
     @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("trades", tradeService.getAllTrades());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = ( UserDetails) authentication.getPrincipal();
+        model.addAttribute("username", userDetails.getUsername() );
         return "trade/list";
     }
 

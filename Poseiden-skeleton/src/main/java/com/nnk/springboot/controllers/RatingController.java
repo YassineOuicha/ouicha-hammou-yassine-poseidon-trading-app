@@ -4,6 +4,9 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.services.RatingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,11 +23,18 @@ import java.util.List;
 public class RatingController {
 
     @Autowired
-    private RatingService ratingService;
+    private final RatingService ratingService;
+
+    public RatingController(RatingService ratingService) {
+        this.ratingService = ratingService;
+    }
 
     @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("ratings", ratingService.getAllRating());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = ( UserDetails) authentication.getPrincipal();
+        model.addAttribute("username", userDetails.getUsername() );
         return "rating/list";
     }
 

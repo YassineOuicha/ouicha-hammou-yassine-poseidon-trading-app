@@ -12,10 +12,6 @@
         <div class="col-12 text-center">
             <h1 class="text-danger">Something went wrong.</h1>
             <p class="lead" th:text="${errorMsg}">An unexpected error occurred.</p>
-            <p>Logged in as: <b th:text="${#httpServletRequest.remoteUser}"></b></p>
-            <form th:action="@{/logout}" method="POST">
-                <button type="submit" class="btn btn-outline-danger">Logout</button>
-            </form>
             <a href="/" class="btn btn-primary mt-3">Return to Home</a>
         </div>
     </div>
