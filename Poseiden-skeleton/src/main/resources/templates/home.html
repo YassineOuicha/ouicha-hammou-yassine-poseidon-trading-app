@@ -17,9 +17,9 @@
 
     <div style="font-family: Arial, sans-serif;">
         <span>Logged in user: <span th:text="${username}"></span></span>
-        <a href="/logout">
-            <button style="margin-left: 10px; padding: 2px 8px;">Logout</button>
-        </a>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button type="submit" style="margin-left: 10px; padding: 2px 8px;">Logout</button>
+        </form>
     </div>
 
     <div class="row mt-4">
