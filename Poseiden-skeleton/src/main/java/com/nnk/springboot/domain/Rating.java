@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -26,7 +27,7 @@ public class Rating {
     @Column(name = "fitch_rating")
     private String fitchRating;
 
-    @NotBlank(message = "Order Number is mandatory")
+    @NotNull(message = "Order Number is mandatory")
     @Column(name = "order_number")
-    private int orderNumber;
+    private Integer orderNumber;
 }
