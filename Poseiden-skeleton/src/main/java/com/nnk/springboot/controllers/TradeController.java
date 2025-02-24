@@ -43,7 +43,7 @@ public class TradeController {
         return "trade/add";
     }
 
-    @PostMapping("/trade/validate")
+    @PostMapping("/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
         if (result.hasErrors()){
             return "trade/add";
