@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <meta charset="UTF-8"/>
+    <title>Access Denied</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 </head>
 <body>
-<h3>Access Denied</h3>
-<div>
-    <p th:if="${#httpServletRequest.remoteUser}">
-        Logged in user: <b th:text="${#httpServletRequest.remoteUser}"></b>
-    </p>
-    <form th:action="@{/logout}" method="POST">
-        <input type="submit" value="Logout" class="btn btn-danger"/>
-    </form>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <h1 class="text-danger">403 - Access Denied</h1>
+            <div style="font-family: Arial, sans-serif;">
+                <span>Logged in user: <span th:text="${username}"></span></span>
+            </div>
+            <p class="lead" th:text="${errorMsg}"></p>
+            <form th:action="@{/logout}" method="POST">
+                <button type="submit" class="btn btn-outline-danger">Logout</button>
+            </form>
+            <a href="/" class="btn btn-primary mt-3">Return to Home</a>
+        </div>
+    </div>
 </div>
-<p class="error" th:text="${errorMsg}">Error</p>
 </body>
 </html>

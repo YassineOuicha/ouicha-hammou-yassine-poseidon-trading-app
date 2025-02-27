@@ -21,26 +21,34 @@ public class TradeTests {
 
 	@Test
 	public void tradeTest() {
-		Trade trade = new Trade("Trade Account", "Type");
+		Trade trade = new Trade();
+		trade.setAccount("Trade Account");
+		trade.setType("Type");
 
 		// Save
 		trade = tradeRepository.save(trade);
-		Assert.assertNotNull(trade.getTradeId());
-		Assert.assertTrue(trade.getAccount().equals("Trade Account"));
+		Integer generatedId = trade.getTradeId();
+
+		Assert.assertNotNull(generatedId);
+		Assert.assertTrue(generatedId > 0);
+		Assert.assertEquals("Trade Account", trade.getAccount());
 
 		// Update
 		trade.setAccount("Trade Account Update");
-		trade = tradeRepository.save(trade);
-		Assert.assertTrue(trade.getAccount().equals("Trade Account Update"));
+		Trade updatedTrade = tradeRepository.save(trade);
+		Assert.assertEquals("Trade Account Update", updatedTrade.getAccount());
 
 		// Find
 		List<Trade> listResult = tradeRepository.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
+		// FindById
+		Optional<Trade> foundTrade = tradeRepository.findById(generatedId);
+		Assert.assertTrue(foundTrade.isPresent());
+
 		// Delete
-		Integer id = trade.getTradeId();
 		tradeRepository.delete(trade);
-		Optional<Trade> tradeList = tradeRepository.findById(id);
-		Assert.assertFalse(tradeList.isPresent());
+		Optional<Trade> deletedTrade = tradeRepository.findById(generatedId);
+		Assert.assertFalse(deletedTrade.isPresent());
 	}
 }

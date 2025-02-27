@@ -21,26 +21,36 @@ public class RatingTests {
 
 	@Test
 	public void ratingTest() {
-		Rating rating = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+		Rating rating = new Rating();
+		rating.setOrderNumber(10);
+		rating.setMoodysRating("Moodys Rating");
+		rating.setFitchRating("Fitch Rating");
+		rating.setSandPRating("Sand PRating");
 
 		// Save
 		rating = ratingRepository.save(rating);
-		Assert.assertNotNull(rating.getId());
-		Assert.assertTrue(rating.getOrderNumber() == 10);
+		Integer generatedId = rating.getId();
+
+		Assert.assertNotNull(generatedId);
+		Assert.assertTrue(generatedId > 0);
+		Assert.assertEquals(10, rating.getOrderNumber());
 
 		// Update
 		rating.setOrderNumber(20);
-		rating = ratingRepository.save(rating);
-		Assert.assertTrue(rating.getOrderNumber() == 20);
+		Rating updatedRating = ratingRepository.save(rating);
+		Assert.assertEquals(20, updatedRating.getOrderNumber());
 
 		// Find
 		List<Rating> listResult = ratingRepository.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
+		// FindById
+		Optional<Rating> foundRating = ratingRepository.findById(generatedId);
+		Assert.assertTrue(foundRating.isPresent());
+
 		// Delete
-		Integer id = rating.getId();
 		ratingRepository.delete(rating);
-		Optional<Rating> ratingList = ratingRepository.findById(id);
-		Assert.assertFalse(ratingList.isPresent());
+		Optional<Rating> deletedRating = ratingRepository.findById(generatedId);
+		Assert.assertFalse(deletedRating.isPresent());
 	}
 }

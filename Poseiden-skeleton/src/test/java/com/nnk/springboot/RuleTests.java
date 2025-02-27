@@ -21,26 +21,38 @@ public class RuleTests {
 
 	@Test
 	public void ruleTest() {
-		RuleName rule = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+		RuleName rule = new RuleName();
+		rule.setName("Rule Name");
+		rule.setDescription("Description");
+		rule.setJson("Json");
+		rule.setTemplate("Template");
+		rule.setSqlStr("SQL");
+		rule.setSqlPart("SQL Part");
 
 		// Save
 		rule = ruleNameRepository.save(rule);
-		Assert.assertNotNull(rule.getId());
-		Assert.assertTrue(rule.getName().equals("Rule Name"));
+		Integer generatedId = rule.getId();
+
+		Assert.assertNotNull(generatedId);
+		Assert.assertTrue(generatedId > 0);
+		Assert.assertEquals("Rule Name", rule.getName());
 
 		// Update
 		rule.setName("Rule Name Update");
-		rule = ruleNameRepository.save(rule);
-		Assert.assertTrue(rule.getName().equals("Rule Name Update"));
+		RuleName updatedRule = ruleNameRepository.save(rule);
+		Assert.assertEquals("Rule Name Update", updatedRule.getName());
 
 		// Find
 		List<RuleName> listResult = ruleNameRepository.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
+		// FindById
+		Optional<RuleName> foundRule = ruleNameRepository.findById(generatedId);
+		Assert.assertTrue(foundRule.isPresent());
+
 		// Delete
-		Integer id = rule.getId();
 		ruleNameRepository.delete(rule);
-		Optional<RuleName> ruleList = ruleNameRepository.findById(id);
-		Assert.assertFalse(ruleList.isPresent());
+		Optional<RuleName> deletedRule = ruleNameRepository.findById(generatedId);
+		Assert.assertFalse(deletedRule.isPresent());
 	}
 }

@@ -4,6 +4,9 @@ import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.CurvePointService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +21,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CurvePointController {
 
     @Autowired
-    private CurvePointService curvePointService;
+    private final CurvePointService curvePointService;
+
+    public CurvePointController(CurvePointService curvePointService) {
+        this.curvePointService = curvePointService;
+    }
 
     @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("curvePoints", curvePointService.getAllCurvePoint());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = ( UserDetails) authentication.getPrincipal();
+        model.addAttribute("username", userDetails.getUsername() );
         return "curvePoint/list";
     }
 
@@ -43,7 +53,8 @@ public class CurvePointController {
 
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        CurvePoint curvePoint = curvePointService.getCurvePointById(id).orElseThrow(()-> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+        CurvePoint curvePoint = curvePointService.getCurvePointById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
         model.addAttribute("curvePoint", curvePoint);
         return "curvePoint/update";
     }
@@ -62,7 +73,8 @@ public class CurvePointController {
 
     @GetMapping("/delete/{id}")
     public String deleteCurve(@PathVariable("id") Integer id, Model model) {
-        CurvePoint curvePoint = curvePointService.getCurvePointById(id).orElseThrow(()-> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+        CurvePoint curvePoint = curvePointService.getCurvePointById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
         curvePointService.deleteCurvePointById(id);
         model.addAttribute("curvePoints", curvePointService.getAllCurvePoint());
         return "redirect:/curvePoint/list";
