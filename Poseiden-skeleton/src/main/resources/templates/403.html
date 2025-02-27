@@ -14,7 +14,7 @@
             <div style="font-family: Arial, sans-serif;">
                 <span>Logged in user: <span th:text="${username}"></span></span>
             </div>
-            <p class="lead">You do not have permission to access this page.</p>
+            <p class="lead" th:text="${errorMsg}"></p>
             <form th:action="@{/logout}" method="POST">
                 <button type="submit" class="btn btn-outline-danger">Logout</button>
             </form>
