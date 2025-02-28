@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.config</a> &gt; <span class="el_source">SecurityConfig.java</span></div><h1>SecurityConfig.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.config;
+
+import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.services.CustomUserDetailsService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+@Configuration
+public class SecurityConfig {
+
+    private final CustomUserDetailsService userDetailsService;
+
+<span class="nc" id="L20">    public SecurityConfig(UserRepository userRepository) {</span>
+<span class="nc" id="L21">        this.userDetailsService = new CustomUserDetailsService(userRepository);</span>
+<span class="nc" id="L22">    }</span>
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+<span class="nc" id="L26">        return new BCryptPasswordEncoder();</span>
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+<span class="nc" id="L31">        http</span>
+<span class="nc" id="L32">                .userDetailsService(userDetailsService)</span>
+<span class="nc" id="L33">                .authorizeHttpRequests(auth -&gt; auth</span>
+<span class="nc" id="L34">                        .requestMatchers(&quot;/css/**&quot;, &quot;/js/**&quot;, &quot;/images/**&quot;).permitAll()</span>
+<span class="nc" id="L35">                        .requestMatchers(&quot;/&quot;, &quot;/login&quot;, &quot;/error&quot;).permitAll()</span>
+<span class="nc" id="L36">                        .requestMatchers(&quot;/user/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
+<span class="nc" id="L37">                        .anyRequest().authenticated()</span>
+                )
+<span class="nc" id="L39">                .formLogin(form -&gt; form</span>
+<span class="nc" id="L40">                        .loginPage(&quot;/login&quot;)</span>
+<span class="nc" id="L41">                        .successHandler(customAuthenticationSuccessHandler())</span>
+<span class="nc" id="L42">                        .failureUrl(&quot;/login?error=true&quot;)</span>
+<span class="nc" id="L43">                        .permitAll()</span>
+                )
+<span class="nc" id="L45">                .logout(logout -&gt; logout</span>
+<span class="nc" id="L46">                        .logoutUrl(&quot;/logout&quot;)</span>
+<span class="nc" id="L47">                        .logoutSuccessUrl(&quot;/logout-success&quot;)</span>
+<span class="nc" id="L48">                        .invalidateHttpSession(true)</span>
+<span class="nc" id="L49">                        .deleteCookies(&quot;JSESSIONID&quot;)</span>
+<span class="nc" id="L50">                        .permitAll()</span>
+                )
+<span class="nc" id="L52">                .sessionManagement(session -&gt; session</span>
+<span class="nc" id="L53">                        .maximumSessions(1)</span>
+<span class="nc" id="L54">                        .expiredUrl(&quot;/login?expired&quot;)</span>
+                )
+<span class="nc" id="L56">                .exceptionHandling(ex -&gt; ex</span>
+<span class="nc" id="L57">                        .accessDeniedPage(&quot;/403&quot;)</span>
+                )
+<span class="nc" id="L59">                .csrf(csrf -&gt; csrf</span>
+<span class="nc" id="L60">                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())</span>
+                )
+<span class="nc" id="L62">                .headers(headers -&gt; headers</span>
+<span class="nc" id="L63">                        .xssProtection(xss -&gt; xss</span>
+<span class="nc" id="L64">                                .headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)</span>
+                        )
+<span class="nc" id="L66">                        .contentSecurityPolicy(csp -&gt; csp</span>
+<span class="nc" id="L67">                                .policyDirectives(&quot;frame-ancestors 'self'&quot;)</span>
+                        )
+                );
+<span class="nc" id="L70">        return http.build();</span>
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+<span class="nc" id="L75">        return (request, response, authentication) -&gt; {</span>
+<span class="nc" id="L76">            String role = authentication.getAuthorities().iterator().next().getAuthority();</span>
+<span class="nc" id="L77">            System.out.println(&quot;Authority received in handler: &quot; + role);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (role.equals(&quot;ROLE_ADMIN&quot;)) {</span>
+<span class="nc" id="L79">                System.out.println(&quot;Redirecting to admin home&quot;);</span>
+<span class="nc" id="L80">                response.sendRedirect(&quot;/admin/home&quot;);</span>
+            } else {
+<span class="nc" id="L82">                System.out.println(&quot;Redirecting to bid list&quot;);</span>
+<span class="nc" id="L83">                response.sendRedirect(&quot;/bidList/list&quot;);</span>
+            }
+<span class="nc" id="L85">        };</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
