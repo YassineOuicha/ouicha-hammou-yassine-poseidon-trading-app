@@ -32,7 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 });
 
         logger.info("Found user: " + user.getUsername());
-        logger.info("Hashed password from DB: " + user.getPassword());
         logger.info("User role from DB: " + user.getRole());
 
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
