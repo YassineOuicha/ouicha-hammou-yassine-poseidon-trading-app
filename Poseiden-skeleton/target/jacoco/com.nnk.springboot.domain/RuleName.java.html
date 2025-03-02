@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RuleName.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.domain</a> &gt; <span class="el_source">RuleName.java</span></div><h1>RuleName.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.domain;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+<span class="nc bnc" id="L7" title="All 56 branches missed.">@Data</span>
+@Entity
+@Table(name = &quot;rulename&quot;)
+public class RuleName {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = &quot;id&quot;)
+<span class="nc" id="L15">    private int id;</span>
+
+    @NotBlank(message = &quot;Name is mandatory&quot;)
+    @Column(name = &quot;name&quot;)
+<span class="nc" id="L19">    private String name;</span>
+
+    @NotBlank(message = &quot;Description is mandatory&quot;)
+    @Column(name = &quot;description&quot;)
+<span class="nc" id="L23">    private String description;</span>
+
+    @NotBlank(message = &quot;Json is mandatory&quot;)
+    @Column(name = &quot;json&quot;)
+<span class="nc" id="L27">    private String json;</span>
+
+    @NotBlank(message = &quot;Template is mandatory&quot;)
+    @Column(name = &quot;template&quot;)
+<span class="nc" id="L31">    private String template;</span>
+
+    @NotBlank(message = &quot;SQL Str is mandatory&quot;)
+    @Column(name = &quot;sql_str&quot;)
+<span class="nc" id="L35">    private String sqlStr;</span>
+
+    @NotBlank(message = &quot;Sql Part is mandatory&quot;)
+    @Column(name = &quot;sql_part&quot;)
+<span class="nc" id="L39">    private String sqlPart;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

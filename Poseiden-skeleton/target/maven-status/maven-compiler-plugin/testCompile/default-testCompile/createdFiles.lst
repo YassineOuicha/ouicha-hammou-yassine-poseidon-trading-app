@@ -1,5 +1,5 @@
 com\nnk\springboot\PasswordEncodeTest.class
-com\nnk\springboot\controllers\BidTest.class
+com\nnk\springboot\BidTests.class
 com\nnk\springboot\RatingTests.class
 com\nnk\springboot\UserTests.class
 com\nnk\springboot\CurvePointTests.class
