@@ -33,12 +33,12 @@ public class RatingTests {
 
 		Assert.assertNotNull(generatedId);
 		Assert.assertTrue(generatedId > 0);
-		Assert.assertEquals(10, rating.getOrderNumber());
+		Assert.assertEquals(Integer.valueOf(10), rating.getOrderNumber());
 
 		// Update
 		rating.setOrderNumber(20);
 		Rating updatedRating = ratingRepository.save(rating);
-		Assert.assertEquals(20, updatedRating.getOrderNumber());
+		Assert.assertEquals(Integer.valueOf(20), updatedRating.getOrderNumber());
 
 		// Find
 		List<Rating> listResult = ratingRepository.findAll();

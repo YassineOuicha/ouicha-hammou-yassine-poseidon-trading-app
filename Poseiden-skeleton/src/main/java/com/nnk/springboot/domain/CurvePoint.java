@@ -32,4 +32,13 @@ public class CurvePoint {
 
     @Column(name = "creation_date")
     private Timestamp creationDate;
+
+
+    public Integer getCurveId() {
+        return curveId;
+    }
+
+    public void setCurveId(Integer curveId) {
+        this.curveId = curveId;
+    }
 }

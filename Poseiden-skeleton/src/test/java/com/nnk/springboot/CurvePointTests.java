@@ -32,12 +32,12 @@ public class CurvePointTests {
 
 		Assert.assertNotNull(generatedId);
 		Assert.assertTrue(generatedId > 0);
-		Assert.assertEquals(10, curvePoint.getCurveId());
+		Assert.assertEquals(Integer.valueOf(10), curvePoint.getCurveId());
 
 		// Update
 		curvePoint.setCurveId(20);
 		CurvePoint updatedCurvePoint = curvePointRepository.save(curvePoint);
-		Assert.assertEquals(20, updatedCurvePoint.getCurveId());
+		Assert.assertEquals(Integer.valueOf(20), updatedCurvePoint.getCurveId());
 
 		// Find
 		List<CurvePoint> listResult = curvePointRepository.findAll();
@@ -52,4 +52,5 @@ public class CurvePointTests {
 		Optional<CurvePoint> deletedCurvePoint = curvePointRepository.findById(generatedId);
 		Assert.assertFalse(deletedCurvePoint.isPresent());
 	}
+
 }

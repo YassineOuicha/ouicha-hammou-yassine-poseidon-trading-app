@@ -14,6 +14,7 @@ com\nnk\springboot\domain\RuleName.class
 com\nnk\springboot\domain\CurvePoint.class
 com\nnk\springboot\services\RatingService.class
 com\nnk\springboot\controllers\HomeController.class
+com\nnk\springboot\controllers\LogoutController.class
 com\nnk\springboot\services\RuleNameService.class
 com\nnk\springboot\domain\User.class
 com\nnk\springboot\repositories\TradeRepository.class
