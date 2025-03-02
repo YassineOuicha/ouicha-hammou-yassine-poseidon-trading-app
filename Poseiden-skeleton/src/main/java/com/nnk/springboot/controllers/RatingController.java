@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-
+/**
+ * Controller to manage Rating entities.
+ */
 @Controller
 @RequestMapping("/rating")
 public class RatingController {
@@ -25,10 +27,21 @@ public class RatingController {
     @Autowired
     private final RatingService ratingService;
 
+    /**
+     * Constructor injection for RatingService.
+     *
+     * @param ratingService the rating service
+     */
     public RatingController(RatingService ratingService) {
         this.ratingService = ratingService;
     }
 
+    /**
+     * Displays the list of ratings.
+     *
+     * @param model the model
+     * @return the rating list view
+     */
     @RequestMapping("/list")
     public String home(Model model) {
         model.addAttribute("ratings", ratingService.getAllRating());
@@ -38,11 +51,25 @@ public class RatingController {
         return "rating/list";
     }
 
+    /**
+     * Displays the form to add a new rating.
+     *
+     * @param rating a new rating object
+     * @return the add rating view
+     */
     @GetMapping("/add")
     public String addRatingForm(Rating rating) {
         return "rating/add";
     }
 
+    /**
+     * Validates and saves a new rating.
+     *
+     * @param rating the rating object
+     * @param result validation result
+     * @param model  the model
+     * @return the redirect path
+     */
     @PostMapping("/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
         if (result.hasErrors()){
@@ -53,6 +80,13 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Displays the form to update an existing rating.
+     *
+     * @param id    the rating id
+     * @param model the model
+     * @return the update rating view
+     */
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Rating rating = ratingService.getRatingById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Rating Id:" + id));
@@ -60,6 +94,15 @@ public class RatingController {
         return "rating/update";
     }
 
+    /**
+     * Updates an existing rating.
+     *
+     * @param id     the rating id
+     * @param rating the updated rating object
+     * @param result validation result
+     * @param model  the model
+     * @return the redirect path
+     */
     @PostMapping("/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
@@ -72,6 +115,13 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Deletes a rating.
+     *
+     * @param id    the rating id
+     * @param model the model
+     * @return the redirect path
+     */
     @GetMapping("/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         Rating rating = ratingService.getRatingById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Rating Id:" + id));

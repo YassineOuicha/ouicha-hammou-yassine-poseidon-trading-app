@@ -9,16 +9,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Controller for handling login and access-related requests.
+ */
 @Controller
 public class LoginController {
 
     @Autowired
     private final UserRepository userRepository;
 
+    /**
+     * Constructor for LoginController.
+     *
+     * @param userRepository the user repository
+     */
     public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Displays the login page.
+     *
+     * @return the login view
+     */
     @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
@@ -26,6 +39,11 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * Retrieves and displays a list of users for authorized users (role = admin).
+     *
+     * @return the user list view
+     */
     @GetMapping("/secure/article-details")
     public ModelAndView getAllUserArticles() {
         ModelAndView mav = new ModelAndView();
@@ -34,6 +52,11 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * Displays the access denied (403) error page.
+     *
+     * @return the 403 error view
+     */
     @GetMapping("/403")
     public ModelAndView error() {
         ModelAndView mav = new ModelAndView();

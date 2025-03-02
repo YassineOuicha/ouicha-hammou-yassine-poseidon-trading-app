@@ -12,20 +12,40 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+/**
+ * Security configuration for the application.
+ */
 @Configuration
 public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
 
+    /**
+     * Constructor for SecurityConfig that initializes the user service.
+     *
+     * @param userRepository the user repository
+     */
     public SecurityConfig(UserRepository userRepository) {
         this.userDetailsService = new CustomUserDetailsService(userRepository);
     }
 
+    /**
+     * Defines the password encoder used to secure user passwords.
+     *
+     * @return a BCrypt password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Defines the HTTP security configuration for the application.
+     *
+     * @param http the HttpSecurity object used to configure security
+     * @return the configured SecurityFilterChain object
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -70,6 +90,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Defines a custom authentication success handler that redirects users based on their role.
+     *
+     * @return an authentication success handler
+     */
     @Bean
     public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
         return (request, response, authentication) -> {
