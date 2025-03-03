@@ -24,7 +24,6 @@ import java.util.List;
 @RequestMapping("/ruleName")
 public class RuleNameController {
 
-    @Autowired
     private final RuleNameService ruleNameService;
 
     /**

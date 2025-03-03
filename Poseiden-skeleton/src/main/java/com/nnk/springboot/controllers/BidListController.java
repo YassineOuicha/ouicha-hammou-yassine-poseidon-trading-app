@@ -1,10 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.services.BidListService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,16 +23,16 @@ import java.util.List;
 @RequestMapping("/bidList")
 public class BidListController {
 
-    @Autowired
-    private final BidListRepository bidListRepository;
+
+    private final BidListService bidListService;
 
     /**
      * Constructor for BidListController.
      *
-     * @param bidListRepository the repository for bid list operations
+     * @param bidListService the service for bid list operations
      */
-    public BidListController(BidListRepository bidListRepository) {
-        this.bidListRepository = bidListRepository;
+    public BidListController(BidListService bidListService) {
+        this.bidListService = bidListService;
     }
 
     /**
@@ -45,7 +43,7 @@ public class BidListController {
      */
     @RequestMapping("/list")
     public String home(Model model) {
-        List<BidList> bids = bidListRepository.findAll();
+        List<BidList> bids = bidListService.getAllBidList();
         model.addAttribute("bidLists", bids);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -78,8 +76,8 @@ public class BidListController {
         if (result.hasErrors()) {
             return "bidList/add";
         }
-        bidListRepository.save(bid);
-        model.addAttribute("bidLists", bidListRepository.findAll());
+        bidListService.saveBidList(bid);
+        model.addAttribute("bidLists", bidListService.getAllBidList());
         return "redirect:/bidList/list";
     }
 
@@ -92,7 +90,7 @@ public class BidListController {
      */
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        BidList bidList = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
+        BidList bidList = bidListService.getBidListById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
         model.addAttribute("bidList", bidList);
         return "bidList/update";
     }
@@ -113,8 +111,8 @@ public class BidListController {
             return "bidList/update";
         }
         bidList.setBidListId(id);
-        bidListRepository.save(bidList);
-        model.addAttribute("bidLists", bidListRepository.findAll());
+        bidListService.saveBidList(bidList);
+        model.addAttribute("bidLists", bidListService.getAllBidList());
         return "redirect:/bidList/list";
     }
 
@@ -127,9 +125,9 @@ public class BidListController {
      */
     @GetMapping("/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        BidList bidList = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
-        bidListRepository.delete(bidList);
-        model.addAttribute("bidLists", bidListRepository.findAll());
+        BidList bidList = bidListService.getBidListById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
+        bidListService.deleteBidListById(id);
+        model.addAttribute("bidLists", bidListService.getAllBidList());
         return "redirect:/bidList/list";
     }
 }

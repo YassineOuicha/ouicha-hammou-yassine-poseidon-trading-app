@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/rating")
 public class RatingController {
 
-    @Autowired
+
     private final RatingService ratingService;
 
     /**

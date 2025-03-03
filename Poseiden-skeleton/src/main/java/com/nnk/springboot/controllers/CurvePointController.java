@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/curvePoint")
 public class CurvePointController {
 
-    @Autowired
     private final CurvePointService curvePointService;
 
     /**
