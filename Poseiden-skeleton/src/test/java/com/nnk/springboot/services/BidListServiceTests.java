@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class BidListServiceTest {
+public class BidListServiceTests {
 
     @Mock
     private BidListRepository bidListRepository;

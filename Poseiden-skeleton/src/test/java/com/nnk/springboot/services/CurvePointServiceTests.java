@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CurvePointServiceTest {
+public class CurvePointServiceTests {
 
     @Mock
     private CurvePointRepository curvePointRepository;
