@@ -1,8 +1,7 @@
-package com.nnk.springboot;
+package com.nnk.springboot.repositories;
 
 
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
