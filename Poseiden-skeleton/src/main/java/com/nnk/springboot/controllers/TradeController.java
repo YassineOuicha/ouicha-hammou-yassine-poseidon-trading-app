@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/trade")
 public class TradeController {
 
-    @Autowired
+
     private final TradeService tradeService;
 
     /**

@@ -9,13 +9,12 @@ C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-y
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\services\RuleNameService.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\domain\CurvePoint.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\controllers\RatingController.java
-C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\config\PasswordConstraintValidator.java
+C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\services\UserService.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\services\CustomUserDetailsService.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\controllers\CurvePointController.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\repositories\CurvePointRepository.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\domain\Trade.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\services\CurvePointService.java
-C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\config\ValidPassword.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\services\BidListService.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\domain\BidList.java
 C:\Users\User\OneDrive\Desktop\Y.Ouicha\OpenClassrooms\Projet_N7\ouicha-hammou-yassine-poseidon-trading-app\Poseiden-skeleton\src\main\java\com\nnk\springboot\services\TradeService.java
