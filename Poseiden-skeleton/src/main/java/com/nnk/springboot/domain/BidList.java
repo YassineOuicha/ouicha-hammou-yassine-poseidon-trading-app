@@ -24,6 +24,7 @@ public class BidList {
     @Column(name = "type")
     private String type;
 
+    @NotNull(message = "Bid Quantity is mandatory")
     @Column(name = "bid_quantity")
     private double bidQuantity;
 
